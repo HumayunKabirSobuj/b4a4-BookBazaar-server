@@ -1,6 +1,6 @@
 
-const RegisterUser = async () => {};
+const RegisterUserIntoDB = async () => {};
 
 export const userServices = {
-    RegisterUser,
+    RegisterUserIntoDB,
 };
