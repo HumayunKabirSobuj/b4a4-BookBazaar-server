@@ -16,4 +16,3 @@ const getController = (req: Request, res: Response) => {
 app.get('/', getController);
 
 export default app;
-
