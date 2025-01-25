@@ -4,8 +4,8 @@ import { userServices } from './user.service';
 const registerUser = async (req: Request, res: Response) => {
   try {
     const userData = req.body;
-    console.log('User Data', userData);
-    const result = await userServices.RegisterUserIntoDB();
+    // console.log('User Data', userData);
+    const result = await userServices.RegisterUserIntoDB(userData);
     res.status(200).json({
       success: true,
       message: 'Student is created succesfully',
