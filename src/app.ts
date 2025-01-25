@@ -11,7 +11,7 @@ app.use(express.json());
 // app.use('/api/v1/students', StudentRoutes);
 
 const getController = (req: Request, res: Response) => {
-  res.send('Hello World!');
+  res.send('BookBazaar Server Running...');
 };
 app.get('/', getController);
 
