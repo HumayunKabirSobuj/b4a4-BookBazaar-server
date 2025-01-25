@@ -1,21 +1,31 @@
-import express, { Request, Response } from 'express';
+import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import { UserRoutes } from './app/modules/user/user.route';
-const app = express();
-// const port = 3000;
-app.use(cors());
+import globalErrorHandler from './app/middlewares/globalErrorhandler';
+import notFound from './app/middlewares/notFound';
+import router from './app/routes';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
-//parser
+const app: Application = express();
+
+// Middleware
 app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
+app.use(bodyParser.json());
 
-// app.use('/api/v1/students', StudentRoutes);
+// application route
+app.use('/api', router);
 
-//application Route
-app.use('/api/v1',UserRoutes );
-
-const getController = (req: Request, res: Response) => {
-  res.send('BookBazaar Server Running...');
+// Test route
+const test = async (req: Request, res: Response) => {
+ res.send('BookBazaar server is running...')
 };
-app.get('/', getController);
+
+app.get('/', test);
+
+// Error handlers
+app.use(globalErrorHandler);
+app.use(notFound);
 
 export default app;
