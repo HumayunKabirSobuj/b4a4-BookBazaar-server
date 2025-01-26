@@ -8,4 +8,5 @@ export interface TProduct {
   authorName: string;
   authorEmail: string;
   isAvaillable: boolean;
+  isDeleted?: boolean;
 }

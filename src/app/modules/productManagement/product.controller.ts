@@ -12,7 +12,19 @@ const addBookData = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getAllBookData = catchAsync(async (req, res) => {
+  const result = await productServices.getAllBookDataFromDB();
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Books Data retrived successfully',
+    data: result,
+  });
+});
+
+
 
 export const productController = {
   addBookData,
+  getAllBookData
 };

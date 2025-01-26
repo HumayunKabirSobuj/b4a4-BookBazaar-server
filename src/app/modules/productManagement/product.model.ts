@@ -11,7 +11,7 @@ const ProductSchema = new Schema<TProduct>({
   authorName: { type: String, required: true },
   authorEmail: { type: String, required: true },
   isAvaillable: { type: Boolean, required: true },
+  isDeleted: { type: Boolean, default: false },
 });
-
 
 export const Product = model<TProduct>('Product', ProductSchema);

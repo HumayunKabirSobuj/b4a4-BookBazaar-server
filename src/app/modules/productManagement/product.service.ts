@@ -6,6 +6,11 @@ const addBookDataIndoDB = async (payload: TProduct) => {
   return result;
 };
 
+const getAllBookDataFromDB = async () => {
+  const result = await Product.find({ isDeleted: false });
+  return result;
+};
 export const productServices = {
   addBookDataIndoDB,
+  getAllBookDataFromDB,
 };
