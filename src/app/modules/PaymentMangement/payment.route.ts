@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.post('/success/:tranId', paymentController.paymentSuccess);
 router.post('/failed/:tranId', paymentController.paymentFailed);
+router.put('/get-admin-order-data', paymentController.getAdminOrderData);
 
 export const paymentRoutes = router;

@@ -4,17 +4,24 @@ const paymentSuccessfullIntoDB = async (transactionId: string) => {
   const result = await Order.findOneAndUpdate(
     { transactionId: transactionId },
     { paidStatus: true },
+    {
+      new: true,
+    },
   );
 
   return result;
 };
-const paymentFailedDeleteThisIntoDB = async (transactionId: string) => {
-  const result = await Order.findOneAndDelete({ transactionId: transactionId });
 
+
+const getAdminOrderDataFromDB = async (email: string) => {
+  // console.log(email);
+  const result = await Order.find({
+    paidStatus: true,
+    'product.authorEmail': email,
+  });
   return result;
 };
-
 export const paymentService = {
   paymentSuccessfullIntoDB,
-  paymentFailedDeleteThisIntoDB,
+  getAdminOrderDataFromDB,
 };
