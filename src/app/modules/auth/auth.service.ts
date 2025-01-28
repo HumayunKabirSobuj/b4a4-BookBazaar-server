@@ -10,7 +10,7 @@ const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
   // const user = await UserRegister.isUserExistsEmail(payload.email);
 
-  const user = await UserRegister.isUserExistsEmail(payload?.email)
+  const user = await UserRegister.isUserExistsEmail(payload?.email);
 
   // console.log("user",user);
 
@@ -22,7 +22,7 @@ const loginUser = async (payload: TLoginUser) => {
   const userStatus = user?.isBlocked;
 
   if (userStatus === true) {
-    throw new AppError(StatusCodes.FORBIDDEN, 'This user is blocked ! !');
+    throw new AppError(StatusCodes.FORBIDDEN, 'This user is dectivated !');
   }
 
   // checking if the password is correct
@@ -33,7 +33,7 @@ const loginUser = async (payload: TLoginUser) => {
 
   //create token and sent to the  client
   const jwtPayload = {
-    name:user.name,
+    name: user.name,
     email: user.email,
     role: user.role,
   };
@@ -51,8 +51,6 @@ const loginUser = async (payload: TLoginUser) => {
 
   loginUserEmail(emailFromAccessToken);
 
-  
-
   return {
     accessToken,
     email: payload.email,
@@ -64,7 +62,30 @@ const registerUser = async (payload: TRegisterUser) => {
   return result;
 };
 
+const getAllUserFromDB = async () => {
+  const result = await UserRegister.find();
+  return result;
+};
+
+const deactiveAccount = async (id: string) => {
+  // console.log(id);
+  const result = await UserRegister.findByIdAndUpdate(id, { isBlocked: true });
+  return result;
+};
+
+const changeRoleFromDB = async (userInfo: { role: string; email: string }) => {
+  // console.log('service ', userInfo);
+
+  const result = await UserRegister.findOneAndUpdate(
+    { email: userInfo.email },
+    { role: userInfo.role },
+  );
+  return result
+};
 export const AuthServices = {
   loginUser,
   registerUser,
+  getAllUserFromDB,
+  deactiveAccount,
+  changeRoleFromDB,
 };
