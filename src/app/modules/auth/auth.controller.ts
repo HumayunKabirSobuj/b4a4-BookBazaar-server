@@ -46,6 +46,16 @@ const DeactivateAccount = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const ActivateAccount = catchAsync(async (req, res) => {
+  // console.log(req.body.id);
+  const result = await AuthServices.activeAccountIntoDB(req.body.id);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Account Activate successfully',
+    data: result,
+  });
+});
 const ChangeRole = catchAsync(async (req, res) => {
   // console.log(req.body);
   // console.log(req.body.id);
@@ -64,5 +74,6 @@ export const AuthController = {
   loginUser,
   getAllUser,
   DeactivateAccount,
+  ActivateAccount,
   ChangeRole,
 };

@@ -12,7 +12,6 @@ const paymentSuccessfullIntoDB = async (transactionId: string) => {
   return result;
 };
 
-
 const getAdminOrderDataFromDB = async (email: string) => {
   // console.log(email);
   const result = await Order.find({
@@ -21,7 +20,16 @@ const getAdminOrderDataFromDB = async (email: string) => {
   });
   return result;
 };
+const getUserOrderDataFromDB = async (email: string) => {
+  // console.log(email);
+  const result = await Order.find({
+    paidStatus: true,
+    'userInfo.email': email,
+  });
+  return result;
+};
 export const paymentService = {
   paymentSuccessfullIntoDB,
   getAdminOrderDataFromDB,
+  getUserOrderDataFromDB
 };

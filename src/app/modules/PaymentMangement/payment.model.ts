@@ -94,11 +94,11 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  orderStatus: { type: String, default: 'pending' },
   userInfo: {
     type: UserInfoSchema,
     required: true,
   },
 });
-
 
 export const Order = model<TOrder>('Order', OrderSchema);

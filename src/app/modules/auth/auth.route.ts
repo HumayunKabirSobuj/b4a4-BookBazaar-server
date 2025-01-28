@@ -18,6 +18,7 @@ router.post(
 );
 
 router.post('/admin/block-user', AuthController.DeactivateAccount);
+router.post('/admin/make-active-user', AuthController.ActivateAccount);
 
 router.get('/admin/get-all-user-information', AuthController.getAllUser);
 

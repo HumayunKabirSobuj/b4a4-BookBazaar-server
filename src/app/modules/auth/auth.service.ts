@@ -72,6 +72,11 @@ const deactiveAccount = async (id: string) => {
   const result = await UserRegister.findByIdAndUpdate(id, { isBlocked: true });
   return result;
 };
+const activeAccountIntoDB = async (id: string) => {
+  // console.log(id);
+  const result = await UserRegister.findByIdAndUpdate(id, { isBlocked: false });
+  return result;
+};
 
 const changeRoleFromDB = async (userInfo: { role: string; email: string }) => {
   // console.log('service ', userInfo);
@@ -87,5 +92,6 @@ export const AuthServices = {
   registerUser,
   getAllUserFromDB,
   deactiveAccount,
+  activeAccountIntoDB,
   changeRoleFromDB,
 };

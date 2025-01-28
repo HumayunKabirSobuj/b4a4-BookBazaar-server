@@ -26,5 +26,6 @@ export interface TOrder {
   product: Product;
   paidStatus: boolean;
   transactionId: string;
+  orderStatus?: string;
   userInfo: UserInfo;
 }
