@@ -42,7 +42,8 @@ app.post('/order', async (req, res) => {
   const orderInfo = req.body;
   //   console.log(orderInfo);
   const product = await Product.findById({ _id: orderInfo.productId });
-  //   console.log(product);
+    console.log(product);
+
   const userInfo = orderInfo.userInfo;
   const data = {
     total_amount: product?.price as string,

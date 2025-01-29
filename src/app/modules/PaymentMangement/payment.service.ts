@@ -1,3 +1,4 @@
+import { Product } from '../productManagement/product.model';
 import { Order } from './payment.model';
 
 const paymentSuccessfullIntoDB = async (transactionId: string) => {
@@ -8,6 +9,19 @@ const paymentSuccessfullIntoDB = async (transactionId: string) => {
       new: true,
     },
   );
+
+  // console.log(result.product);
+  const findBook = await Product.findById({ _id: result?.product?._id });
+  // console.log('Find Book =>', findBook);
+  if (findBook) {
+    const updateBookCount = findBook?.numberOfBooks - 1;
+    // console.log(updateBookCount);
+
+    await Product.findByIdAndUpdate(
+      { _id: findBook?._id },
+      { numberOfBooks: updateBookCount },
+    );
+  }
 
   return result;
 };
@@ -57,5 +71,5 @@ export const paymentService = {
   getUserOrderDataFromDB,
   acceptOrderIntoDB,
   cencelOrderIntoDB,
-  deleteOrderFromDB
+  deleteOrderFromDB,
 };
