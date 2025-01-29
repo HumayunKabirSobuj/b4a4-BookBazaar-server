@@ -35,7 +35,7 @@ const getUserOrderData = catchAsync(async (req, res) => {
   });
 });
 const acceptOrder = catchAsync(async (req, res) => {
-  console.log(req.body.id);
+  // console.log(req.body.id);
   // console.log(req.body);
   const result = await paymentService.acceptOrderIntoDB(req.body.id);
   sendResponse(res, {
