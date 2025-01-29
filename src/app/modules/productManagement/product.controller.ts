@@ -31,9 +31,22 @@ const deleteBookData = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const updateBookData = catchAsync(async (req, res) => {
+  // console.log(req.body.BookId);
+  // console.log(req.body.bookInfo);
+  // console.log(req.body.id);
+  const result = await productServices.updateBookIntoDB(req.body.BookId,req.body.bookInfo);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Book Data updated successfully',
+    data: result,
+  });
+});
 
 export const productController = {
   addBookData,
   getAllBookData,
   deleteBookData,
+  updateBookData,
 };

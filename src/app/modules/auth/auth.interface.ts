@@ -11,9 +11,9 @@ export type TRegisterUser = {
   email: string;
   password: string;
   role: 'admin' | 'user';
+  imageUrl: string;
   isBlocked?: boolean;
 };
-
 
 export interface UserModel extends Model<TRegisterUser> {
   isUserExistsEmail(email: string): Promise<TRegisterUser>;

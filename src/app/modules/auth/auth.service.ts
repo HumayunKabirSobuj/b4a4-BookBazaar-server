@@ -36,6 +36,7 @@ const loginUser = async (payload: TLoginUser) => {
     name: user.name,
     email: user.email,
     role: user.role,
+    imageUrl: user.imageUrl,
   };
 
   // console.log(jwtPayload);
@@ -85,7 +86,7 @@ const changeRoleFromDB = async (userInfo: { role: string; email: string }) => {
     { email: userInfo.email },
     { role: userInfo.role },
   );
-  return result
+  return result;
 };
 export const AuthServices = {
   loginUser,

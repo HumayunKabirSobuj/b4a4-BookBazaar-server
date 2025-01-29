@@ -6,5 +6,6 @@ const router = express.Router();
 router.post('/add-product', productController.addBookData);
 router.get('/', productController.getAllBookData);
 router.put('/delete-book', productController.deleteBookData);
+router.put('/update-book', productController.updateBookData);
 
 export const productRoutes = router;

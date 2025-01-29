@@ -11,6 +11,7 @@ const userRegisterSchema = new Schema<TRegisterUser>(
     password: { type: String, required: true, select: 0 },
     role: { type: String, enum: ['admin', 'user'], default: 'user' },
     isBlocked: { type: Boolean, default: false },
+    imageUrl: { type: String, required: true },
   },
   {
     timestamps: true,
@@ -47,7 +48,7 @@ userRegisterSchema.statics.isPasswordMatched = async function (
 };
 
 // Create and export the User model
-export const UserRegister = model<TRegisterUser,UserModel>(
+export const UserRegister = model<TRegisterUser, UserModel>(
   'Users',
   userRegisterSchema,
 );
