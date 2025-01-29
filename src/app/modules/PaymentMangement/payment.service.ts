@@ -28,8 +28,34 @@ const getUserOrderDataFromDB = async (email: string) => {
   });
   return result;
 };
+const acceptOrderIntoDB = async (id: string) => {
+  // console.log(email);
+  // console.log(id);
+
+  const result = await Order.findByIdAndUpdate(id, {
+    orderStatus: 'accepted',
+  });
+  return result;
+};
+const cencelOrderIntoDB = async (id: string) => {
+  // console.log(email);
+  // console.log(id);
+  const result = await Order.findByIdAndUpdate(id, {
+    orderStatus: 'cenceled',
+  });
+  return result;
+};
+const deleteOrderFromDB = async (id: string) => {
+  // console.log(email);
+  // console.log(id);
+  const result = await Order.findByIdAndDelete(id);
+  return result;
+};
 export const paymentService = {
   paymentSuccessfullIntoDB,
   getAdminOrderDataFromDB,
-  getUserOrderDataFromDB
+  getUserOrderDataFromDB,
+  acceptOrderIntoDB,
+  cencelOrderIntoDB,
+  deleteOrderFromDB
 };

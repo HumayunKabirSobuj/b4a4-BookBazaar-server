@@ -34,10 +34,44 @@ const getUserOrderData = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const acceptOrder = catchAsync(async (req, res) => {
+  console.log(req.body.id);
+  // console.log(req.body);
+  const result = await paymentService.acceptOrderIntoDB(req.body.id);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Order accepted successfully',
+    data: result,
+  });
+});
+const cencelOrder = catchAsync(async (req, res) => {
+  // console.log(req.body);
+  const result = await paymentService.cencelOrderIntoDB(req.body.id);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Order cenceled successfully',
+    data: result,
+  });
+});
+const DeleteOrder = catchAsync(async (req, res) => {
+  // console.log(req.body);
+  const result = await paymentService.deleteOrderFromDB(req.body.id);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Order deleted successfully',
+    data: result,
+  });
+});
 
 export const paymentController = {
   paymentSuccess,
   paymentFailed,
   getAdminOrderData,
-  getUserOrderData
+  getUserOrderData,
+  acceptOrder,
+  cencelOrder,
+  DeleteOrder
 };
