@@ -21,10 +21,19 @@ const getAllBookData = catchAsync(async (req, res) => {
     data: result,
   });
 });
-
-
+const deleteBookData = catchAsync(async (req, res) => {
+  // console.log(req.body.id);
+  const result = await productServices.deletedBookIntoDB(req.body.id);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Book Data deleted successfully',
+    data: result,
+  });
+});
 
 export const productController = {
   addBookData,
-  getAllBookData
+  getAllBookData,
+  deleteBookData,
 };

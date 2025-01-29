@@ -10,7 +10,13 @@ const getAllBookDataFromDB = async () => {
   const result = await Product.find({ isDeleted: false });
   return result;
 };
+
+const deletedBookIntoDB = async (id: string) => {
+  const result = await Product.findByIdAndUpdate(id, { isDeleted: true });
+  return result;
+};
 export const productServices = {
   addBookDataIndoDB,
   getAllBookDataFromDB,
+  deletedBookIntoDB
 };
