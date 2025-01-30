@@ -21,7 +21,12 @@ const app: Application = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://bookbazzar-online-ph-a4.vercel.app",
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 
 // application route
@@ -42,15 +47,15 @@ app.post('/order', async (req, res) => {
   const orderInfo = req.body;
   //   console.log(orderInfo);
   const product = await Product.findById({ _id: orderInfo.productId });
-    console.log(product);
+    // console.log(product);
 
   const userInfo = orderInfo.userInfo;
   const data = {
     total_amount: product?.price as string,
     currency: 'BDT',
     tran_id: tran_id, // use unique tran_id for each api call
-    success_url: `http://localhost:8080/payment/success/${tran_id}`,
-    fail_url: `http://localhost:8080/payment/failed/${tran_id}`,
+    success_url: `https://bookbazzar-server-ph-a4.vercel.app/payment/success/${tran_id}`,
+    fail_url: `https://bookbazzar-server-ph-a4.vercel.app/payment/failed/${tran_id}`,
     cancel_url: 'http://localhost:3030/cancel',
     ipn_url: 'http://localhost:3030/ipn',
     shipping_method: 'Courier',
@@ -96,7 +101,7 @@ app.post('/order', async (req, res) => {
     await Order.create(finalOrder); // Use await here
     // console.log('Order Saved: ', result);
 
-    console.log('Redirecting to: ', GatewayPageURL);
+    // console.log('Redirecting to: ', GatewayPageURL);
   } catch (error) {
     console.error('Error occurred:', error);
     res.status(500).send({ error: 'Something went wrong' });
